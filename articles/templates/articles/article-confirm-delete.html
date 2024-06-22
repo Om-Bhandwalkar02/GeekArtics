@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Confirm Delete
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="">Are you sure you want to delete the article?</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input class="btn btn-outline-danger" type="submit" value="Delete">
+        <a href="{% url 'articles' %}" class="btn btn-outline-success">Cancel</a>
+    </form>
+    </div>
+{% endblock %}

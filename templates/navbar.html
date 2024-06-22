@@ -1,0 +1,77 @@
+<style>
+.animated-button {
+  position: relative;
+  display: inline-block;
+  padding: 7px 18px;
+  border: none;
+  font-size: 16px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 600;
+  color: #ffffff40;
+  box-shadow: 0 0 0 2px #ffffff20;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.animated-button span:last-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: #2196F3;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.animated-button span:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.animated-button:hover {
+  box-shadow: 0 0 0 5px #2195f360;
+  color: #ffffff;
+}
+
+.animated-button:active {
+  scale: 0.95;
+}
+
+.animated-button:hover span:last-child {
+  width: 150px;
+  height: 150px;
+  opacity: 1;
+}
+
+</style>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">GeekArtics</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      </ul>
+          {% if user.is_authenticated%}
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+{#                <button class="button-17 mx-2" type="submit">Logout</button>#}
+{#                <a class="button-17" href="{% url 'create_article' %}" style="text-decoration: none">Create</a>#}
+                <button class="animated-button" style="margin: -1px">
+                <span>Logout</span>
+                <span></span>
+                </button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="button-17" style="margin: 6px; text-decoration: none">Login</a>
+            <a href="{% url 'register' %}" class="button-17" style="margin: 6px; text-decoration: none">Get Started</a>
+        {% endif %}
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Login
+{% endblock %}
+
+{% block content %}
+    <div class="container m-5">
+    <div class="shadow p-5 mb-5 bg-body rounded">
+        <h2 class="mb-3">Login</h2>
+    <form method="POST">
+        {% csrf_token %}
+
+            {% if form.errors %}
+            	<p style="color: #f2545b">Please enter a correct username and password</p>
+            {% endif %}
+            <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="username" name="username">
+            <label for="floatingInput">Username</label>
+            </div>
+
+            <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+            <label for="floatingPassword">Password</label>
+            </div>
+        <button class="button-17 mt-3">Login</button>
+    </form>
+    <p class="mt-1">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    </div>
+    </div>
+{% endblock %}

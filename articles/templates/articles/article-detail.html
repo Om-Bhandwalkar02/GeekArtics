@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	View GeekArtics
+{% endblock %}
+
+{% block content %}
+    <style>
+.button {
+  position: relative;
+  width: 2em;
+  height: 2em;
+  border: none;
+  background: rgba(180, 83, 107, 0.11);
+  border-radius: 5px;
+  transition: background 0.5s;
+}
+
+.X {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2em;
+  height: 1.5px;
+  background-color: rgb(255, 255, 255);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.Y {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2em;
+  height: 1.5px;
+  background-color: #fff;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+.close {
+  position: absolute;
+  display: flex;
+  padding: 0.8rem 1.5rem;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  top: -70%;
+  left: 50%;
+  width: 3em;
+  height: 1.7em;
+  font-size: 12px;
+  background-color: rgb(19, 22, 24);
+  color: rgb(187, 229, 236);
+  border: none;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.button:hover {
+  background-color: rgb(211, 21, 21);
+}
+
+.button:active {
+  background-color: rgb(130, 0, 0);
+}
+
+.button:hover > .close {
+  animation: close 0.2s forwards 0.25s;
+}
+
+@keyframes close {
+  100% {
+    opacity: 1;
+  }
+}
+
+    </style>
+	<div class="container">
+
+        <div class="shadow-lg p-2 m-5 bg-body rounded">
+        <div class="shadow-lg p-3 m-5 bg-body rounded">
+
+              <a href="{% url 'articles' %}">
+                <button class="button mx-2 my-2" >
+                    <span class="X"></span>
+                    <span class="Y"></span>
+                    <div class="close">Close</div>
+                </button>
+            </a>
+        <h1 style="text-align: center; margin-top: 10px">{{ article.title }}</h1>
+        <div class="image-container mt-5">
+            <img src="{{ article.image.url }}" alt="image" style="display: block; margin: 0 auto;" height="300px">
+        </div>
+        <p class="m-4">{{ article.content|linebreaksbr|safe }}</p>
+        <div class="m-4">
+            <p style="margin-bottom: -2px; color: #174ea6"><b>Published: {{ article.pub_date }}</b></p>
+            <p style="color: #174ea6"><b>Author: {{ article.user }}</b></p>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}
